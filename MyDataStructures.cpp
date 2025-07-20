@@ -1,5 +1,5 @@
 ﻿//Кратко о проекте: написание своих аналогов структурам данных STL для того, чтобы лучше разобраться как они работают "под капотом"
-//На данный момент готов только vector, list в процессе реализации
+//На данный момент готов vector, list (без глубокого тестирования)
 
 
 #include <iostream>
@@ -104,8 +104,6 @@ namespace mds {
         }
     };
 
-    //еще erase, insert а затем итераторы сделать
-
     template <typename T>
     class list {
         struct node {
@@ -124,13 +122,19 @@ namespace mds {
             }
         };
 
+        node* head_;
+        node* tail_;
+        size_t size_;
+
+    public:
+
         class iterator {
             node* current;
         public:
-            iterator(node* cur_node) : current(cur_node){}
+            iterator(node* cur_node) : current(cur_node) {}
 
-            T& operator*(node& cur) {
-                return &(cur->data_);
+            T& operator*() {
+                return current->data_;
             }
 
             iterator& operator++() {
@@ -148,13 +152,19 @@ namespace mds {
                 return current != right.current;
             }
 
+            iterator operator +(size_t index) {
+                iterator it(this->get_node());
+                for (size_t i = 0; i < index; i++) {
+                    ++it;
+                }
+                return it;
+            }
+
+            node* get_node() {
+                return current;
+            }
         };
 
-        node* head_;
-        node* tail_;
-        size_t size_;
-
-    public:
         list() : head_(nullptr), tail_(nullptr), size_(0) {}
 
         iterator begin() {
@@ -285,7 +295,8 @@ namespace mds {
             size_ = 0;
         }
 
-        void erase(node* del) {
+        void erase(iterator it) {
+            node* del = it.get_node();
             if (del->next && del->pre) {
                 del->pre->next = del->next;
                 del->next->pre = del->pre;
@@ -293,11 +304,13 @@ namespace mds {
                 delete del;
             }
             else if (del->next) {
+                head_ = del->next;
                 del->next->pre = nullptr;
                 del->next = nullptr;
                 delete del;
             }
             else if (del->pre) {
+                tail_ = del->pre;
                 del->pre->next = nullptr;
                 delete del;
             }
@@ -306,6 +319,22 @@ namespace mds {
                 return;
             }
             size_--;
+        }
+
+        void insert(T data_insert, iterator next_it) {
+            node* ins = new node(data_insert, nullptr, nullptr);
+            node* nex = next_it.get_node();
+            if (head_ != nex) {
+                ins->pre = nex->pre;
+                ins->next = nex;
+                ins->pre = ins;
+                nex->pre = ins;
+            }
+            else {
+                ins->next = nex;
+                nex->pre = ins;
+                head_ = ins;
+            }
         }
 
         ~list() {
@@ -319,18 +348,20 @@ namespace mds {
 
 int main()
 {
-    mds::list<int> li;
-    li.push_back(5);
-    li.push_back(8);
-    li.push_front(3);
-    li.push_front(9);
-    li.push_front(2);
+    //mds::list<int> li;
+    //li.push_back(5);
+    //li.push_back(8);
+    //li.push_front(3);
+    //li.push_front(9);
+    //li.push_front(2);
     //li.clear();
 
     //std::cout << li[0] << std::endl << li[1];
-    //li.erase();
+    //li.erase(li.begin() + 1);
+
+    //li.insert(7, li.begin());
     //std::cout << li.size() << std::endl;
-    //std::cout << li.front() << std::endl;
+    //std::cout << li[0] << std::endl;
     //std::cout << li.back() << std::endl;
     //mds::vector<int> vec;
     //vec.push_back(16);
