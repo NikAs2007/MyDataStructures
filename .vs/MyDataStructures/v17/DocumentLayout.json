@@ -1,0 +1,45 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\Visual Studio 2022\\\u041F\u0440\u043E\u0435\u043A\u0442\u044B\\MyDataStructures\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{424D7B2B-56F6-45F7-9E3C-3AAD005B9DE2}|MyDataStructures.vcxproj|C:\\Users\\Admin\\Desktop\\Visual Studio 2022\\\u041F\u0440\u043E\u0435\u043A\u0442\u044B\\MyDataStructures\\MyDataStructures.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{424D7B2B-56F6-45F7-9E3C-3AAD005B9DE2}|MyDataStructures.vcxproj|solutionrelative:MyDataStructures.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 326,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MyDataStructures.cpp",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Visual Studio 2022\\\u041F\u0440\u043E\u0435\u043A\u0442\u044B\\MyDataStructures\\MyDataStructures.cpp",
+              "RelativeDocumentMoniker": "MyDataStructures.cpp",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Visual Studio 2022\\\u041F\u0440\u043E\u0435\u043A\u0442\u044B\\MyDataStructures\\MyDataStructures.cpp",
+              "RelativeToolTip": "MyDataStructures.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-14T20:44:52.596Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
