@@ -9,11 +9,7 @@ namespace mds {
             node* next;
             node* pre;
             node() : next(nullptr), pre(nullptr) {}
-            node(T data_, node* pre, node* next) {
-                this->data_ = data_;
-                this->next = next;
-                this->pre = pre;
-            }
+            node(T data_, node* pre = nullptr, node* next = nullptr) : data_(data_), next(next), pre(pre) {}
             ~node() {
                 if (next) delete next;
                 //if (pre) delete pre;
@@ -64,6 +60,32 @@ namespace mds {
         };
 
         list() : head_(nullptr), tail_(nullptr), size_(0) {}
+
+        list(const list& other) : size_(other.size_) {
+            head_ = new node;
+            head_->data_ = other.head_->data_;
+            node *temp = head_, *temp_other = other.head_;
+            while (temp_other->next != nullptr) {
+                temp_other = temp_other->next;            
+                temp->next = new node(temp_other->data_, temp, nullptr);
+                temp = temp->next;
+            }
+            tail_ = temp;
+        }
+
+        void operator =(const list& right) {
+            clear();
+            size_ = right.size_;
+            head_ = new node;
+            head_->data_ = right.head_->data_;
+            node* temp = head_, * temp_right = right.head_;
+            while (temp_right->next != nullptr) {
+                temp_right = temp_right->next;
+                temp->next = new node(temp_right->data_, temp, nullptr);
+                temp = temp->next;
+            }
+            tail_ = temp;
+        }
 
         iterator begin() {
             return iterator(head_);
