@@ -50,6 +50,17 @@ namespace mds {
             for (int i = 0; i < size_; i++) {
                 this->first_[i] = right.first_[i];
             }
+
+        }
+
+        void operator =(vector&& right){
+            clear();
+            reserve(right.capacity_);
+            size_ = right.size_;
+            first_ = right.first_;
+            right.first_ = nullptr;
+            right.size_ = 0;
+            right.capacity_ = 1;
         }
 
         void reserve(size_t new_capacity_) {
@@ -356,7 +367,6 @@ namespace mds {
 
 int main()
 {
-
 
     return 0;
 }
