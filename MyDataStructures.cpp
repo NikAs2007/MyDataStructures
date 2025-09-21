@@ -30,6 +30,14 @@ namespace mds {
                 first_[i] = other.first_[i];
             }
         }
+        vector(vector&& other) : first_(other.first_), size_(size_), capacity_(capacity_) {
+            for (int i = 0; i < size_; i++) {
+                first_[i] = other.first_[i];
+            }
+            other.first_ = nullptr;
+            other.size_ = 0;
+            other.capacity_ = 1;
+        }
 
         T& operator [](size_t index) {
             return *(first_ + index);
@@ -348,28 +356,7 @@ namespace mds {
 
 int main()
 {
-    //mds::list<int> li;
-    //li.push_back(5);
-    //li.push_back(8);
-    //li.push_front(3);
-    //li.push_front(9);
-    //li.push_front(2);
-    //li.clear();
 
-    //std::cout << li[0] << std::endl << li[1];
-    //li.erase(li.begin() + 1);
 
-    //li.insert(7, li.begin());
-    //std::cout << li.size() << std::endl;
-    //std::cout << li[0] << std::endl;
-    //std::cout << li.back() << std::endl;
-    //mds::vector<int> vec;
-    //vec.push_back(16);
-    //vec.push_back(15);
-    //for (int i = 10; i > 0; i--) {
-    //    vec.push_back(i);
-    //}
-    //std::sort(vec.begin(), vec.end());
-    //std::cout << vec.front() << std::endl << vec.back();
     return 0;
 }

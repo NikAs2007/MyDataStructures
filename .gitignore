@@ -3,7 +3,9 @@ build/
 *.exe
 *.o
 *.out
+MyDataStructures/
 
+x64/
 .vs/
 .idea/
 *.sln
