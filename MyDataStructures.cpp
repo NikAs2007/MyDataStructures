@@ -14,9 +14,8 @@ int main()
     list1.push_back(2);
     list1.push_back(3);
 
-    mds::list<int> list2;
-    list2 = list1;
+    mds::list<int> list2(std::move(list1));
     //list1.clear();
-    std::cout << list1[2] << ' ' << list2[1] << ' ' << list2[2];
+    std::cout << list2[0] << ' ' << list2[1] << ' ' << list2[2] << ' ' << list1.size();
     return 0;
 }

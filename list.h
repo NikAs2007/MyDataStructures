@@ -87,6 +87,14 @@ namespace mds {
             tail_ = temp;
         }
 
+        list(list&& other) : size_(other.size_){
+            head_ = other.head_;
+            tail_ = other.tail_;
+            other.size_ = 0;
+            other.head_ = nullptr;
+            other.tail_ = nullptr;
+        }
+
         iterator begin() {
             return iterator(head_);
         }
