@@ -26,7 +26,7 @@ namespace mds {
                 first_[i] = other.first_[i];
             }
         }
-        vector(vector&& other) : first_(other.first_), size_(size_), capacity_(capacity_) {
+        vector(vector&& other) noexcept : first_(other.first_), size_(size_), capacity_(capacity_) {
             for (int i = 0; i < size_; i++) {
                 first_[i] = other.first_[i];
             }
@@ -49,7 +49,7 @@ namespace mds {
 
         }
 
-        void operator =(vector&& right) {
+        void operator =(vector&& right) noexcept {
             clear();
             reserve(right.capacity_);
             size_ = right.size_;

@@ -87,12 +87,22 @@ namespace mds {
             tail_ = temp;
         }
 
-        list(list&& other) : size_(other.size_){
+        list(list&& other) noexcept : size_(other.size_){
             head_ = other.head_;
             tail_ = other.tail_;
             other.size_ = 0;
             other.head_ = nullptr;
             other.tail_ = nullptr;
+        }
+
+        void operator =(list&& right) noexcept {
+            clear();
+            size_ = right.size_;
+            head_ = right.head_;
+            tail_ = right.tail_;
+            right.size_ = 0;
+            right.head_ = nullptr;
+            right.tail_ = nullptr;
         }
 
         iterator begin() {
