@@ -11,15 +11,15 @@ namespace mds {
     public:
         vector() : size_(0) {
             capacity_ = 1;
-            first_ = new T[capacity_];
+            first_ = malloc(sizeof(T)*capacity_);
         }
         vector(size_t new_capacity_) {
-            first_ = new T[new_capacity_];
+            first_ = malloc(sizeof(T) * new_capacity_);
             size_ = 0;
             capacity_ = new_capacity_;
         }
         vector(const vector& other) {
-            first_ = new T[other.capacity_];
+            first_ = malloc(sizeof(T) * other.capacity_);
             size_ = other.size_;
             capacity_ = other.capacity_;
             for (int i = 0; i < size_; i++) {
@@ -61,11 +61,13 @@ namespace mds {
 
         void reserve(size_t new_capacity_) {
             if (new_capacity_ == 0) new_capacity_ = 1;
-            T* new_first_ = new T[new_capacity_];
+            //T* new_first_ = new T[new_capacity_];
+            T* new_first_ = malloc(sizeof(T) * new_capacity_);
             for (size_t i = 0; i < size_; i++) {
                 new_first_[i] = first_[i];
             }
-            if (size_) delete[] first_;
+            //
+            if (size_) free(first_);
             first_ = new_first_;
             capacity_ = new_capacity_;
             //delete[] new_first_;
@@ -86,7 +88,7 @@ namespace mds {
         }
 
         void clear() {
-            if (size_) delete[] first_;
+            if (size_) free(first_);
             size_ = 0;
         }
 
@@ -115,7 +117,7 @@ namespace mds {
         }
 
         ~vector() {
-            if (size_) delete[] first_;
+            if (size_) free(first_);
         }
     };
 }
