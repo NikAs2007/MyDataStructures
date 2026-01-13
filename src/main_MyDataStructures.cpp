@@ -2,9 +2,11 @@
 //На данный момент готов vector, list (без глубокого тестирования)
 
 #include "MyDataStructures.h"
+//#include <gtest/gtest.h>
 
-int main(int argc, char* argv[])
+int main()
 {
+
     //используйте
     
     return 0;

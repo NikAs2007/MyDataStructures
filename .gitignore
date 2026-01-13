@@ -3,11 +3,11 @@ build/
 *.exe
 *.o
 *.out
-MyDataStructures/
+src/MyDataStructures/
 
-x64/
-.vs/
-.idea/
+src/x64/
+src/.vs/
+src/.idea/
 *.sln
 *.vcxproj
 *.user
