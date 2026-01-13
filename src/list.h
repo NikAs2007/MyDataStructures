@@ -1,7 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 
-namespace mds {
+namespace MyDataStructures {
     template <typename T>
     class list {
         struct node {
@@ -281,5 +281,7 @@ namespace mds {
         }
     };
 }
+
+namespace mds = MyDataStructures;
 
 #endif //LIST_H

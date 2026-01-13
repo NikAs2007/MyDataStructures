@@ -3,7 +3,6 @@
 #include <utility>
 
 using namespace mds;
-//using namespace std;
 
 TEST(List, AllFunctions) {
 	list<int> l1;
@@ -17,7 +16,7 @@ TEST(List, AllFunctions) {
 	EXPECT_EQ(l1.size(), 11) << "size() err" << std::endl;
 	l1.pop_back();
 	EXPECT_EQ(l1[9], 8) << "pop_back() err" << std::endl;
-	EXPECT_EQ(l1.size(), 10) << "pop() err" << std::endl;
+	EXPECT_EQ(l1.size(), 10) << "pop_back() err" << std::endl;
 	l1.pop_front();
 	EXPECT_EQ(l1[0], 0) << "pop_front() err" << std::endl;
 	EXPECT_EQ(l1.size(), 9) << "pop_front() err" << std::endl;

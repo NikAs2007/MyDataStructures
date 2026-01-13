@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-namespace mds {
+namespace MyDataStructures {
     template <typename T>
     class vector {
         T* first_;
@@ -11,22 +11,22 @@ namespace mds {
     public:
         vector() : size_(0) {
             capacity_ = 1;
-            first_ = malloc(sizeof(T)*capacity_);
+            first_ = (T*)malloc(sizeof(T)*capacity_);
         }
         vector(size_t new_capacity_) {
-            first_ = malloc(sizeof(T) * new_capacity_);
+            first_ = (T*)malloc(sizeof(T) * new_capacity_);
             size_ = 0;
             capacity_ = new_capacity_;
         }
         vector(const vector& other) {
-            first_ = malloc(sizeof(T) * other.capacity_);
+            first_ = (T*)malloc(sizeof(T) * other.capacity_);
             size_ = other.size_;
             capacity_ = other.capacity_;
             for (int i = 0; i < size_; i++) {
                 first_[i] = other.first_[i];
             }
         }
-        vector(vector&& other) noexcept : first_(other.first_), size_(size_), capacity_(capacity_) {
+        vector(vector&& other) noexcept : first_(other.first_), size_(other.size_), capacity_(capacity_) {
             for (int i = 0; i < size_; i++) {
                 first_[i] = other.first_[i];
             }
@@ -62,7 +62,7 @@ namespace mds {
         void reserve(size_t new_capacity_) {
             if (new_capacity_ == 0) new_capacity_ = 1;
             //T* new_first_ = new T[new_capacity_];
-            T* new_first_ = malloc(sizeof(T) * new_capacity_);
+            T* new_first_ = (T*)malloc(sizeof(T) * new_capacity_);
             for (size_t i = 0; i < size_; i++) {
                 new_first_[i] = first_[i];
             }
@@ -121,5 +121,7 @@ namespace mds {
         }
     };
 }
+
+namespace mds = MyDataStructures;
 
 #endif VECTOR_H
