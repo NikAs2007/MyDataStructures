@@ -25,6 +25,7 @@ TEST(Bst_tree, AllFunctions) {
 	EXPECT_EQ(tr.contains(2), true);
 	EXPECT_EQ(*tr.find(2), 2);
 	EXPECT_EQ(tr.size(), 8);
+
 	tr.remove(2);
 	EXPECT_EQ(tr.size(), 7);
 	EXPECT_EQ(tr.contains(2), false);
@@ -35,14 +36,54 @@ TEST(Bst_tree, AllFunctions) {
 	EXPECT_EQ(tr.contains(6), true);
 	EXPECT_EQ(tr.contains(-5), true);
 	EXPECT_EQ(tr.contains(-2), true);
+
 	bst_tree<int> tr1(std::move(tr));
 	EXPECT_EQ(tr1.size(), 7);
 	EXPECT_EQ(tr.size(), 0);
+
 	tr = std::move(tr1);
 	EXPECT_EQ(tr1.size(), 0);
 	EXPECT_EQ(tr.size(), 7);
 
+	bst_tree<int> tr2(tr);
+	EXPECT_EQ(tr.size(), 7);
+	EXPECT_EQ(tr2.size(), 7);
+	EXPECT_EQ(tr2.contains(2), false);
+	EXPECT_EQ(tr2.contains(1), true);
+	EXPECT_EQ(tr2.contains(0), true);
+	EXPECT_EQ(tr2.contains(5), true);
+	EXPECT_EQ(tr2.contains(7), true);
+	EXPECT_EQ(tr2.contains(6), true);
+	EXPECT_EQ(tr2.contains(-5), true);
+	EXPECT_EQ(tr2.contains(-2), true);
+
+	tr1 = tr2;
+	EXPECT_EQ(tr1.size(), 7);
+	EXPECT_EQ(tr1.contains(2), false);
+	EXPECT_EQ(tr1.contains(1), true);
+	EXPECT_EQ(tr1.contains(0), true);
+	EXPECT_EQ(tr1.contains(5), true);
+	EXPECT_EQ(tr1.contains(7), true);
+	EXPECT_EQ(tr1.contains(6), true);
+	EXPECT_EQ(tr1.contains(-5), true);
+	EXPECT_EQ(tr1.contains(-2), true);
+	EXPECT_EQ(tr2.size(), 7);
+	EXPECT_EQ(tr2.contains(2), false);
+	EXPECT_EQ(tr2.contains(1), true);
+	EXPECT_EQ(tr2.contains(0), true);
+	EXPECT_EQ(tr2.contains(5), true);
+	EXPECT_EQ(tr2.contains(7), true);
+	EXPECT_EQ(tr2.contains(6), true);
+	EXPECT_EQ(tr2.contains(-5), true);
+	EXPECT_EQ(tr2.contains(-2), true);
+
 	tr.clear();
+	tr1.clear();
+
+	tr2 = tr2;
+	EXPECT_EQ(tr2.size(), 7);
+	tr2 = std::move(tr2);
+	EXPECT_EQ(tr2.size(), 7);
 	EXPECT_EQ(tr.size(), 0);
 
 }

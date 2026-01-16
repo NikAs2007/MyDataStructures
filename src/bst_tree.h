@@ -28,15 +28,15 @@ namespace MyDataStructures {
 			if (temp && new_node == temp->val) {
 				return;
 			}
-			else if (!temp->right && new_node > temp->val) {
+			else if (temp && !temp->right && new_node > temp->val) {
 				temp->right = new tree_node(new_node);
 				++size_;
 			}
-			else if (!temp->left && new_node < temp->val) {
+			else if (temp && !temp->left && new_node < temp->val) {
 				temp->left = new tree_node(new_node);
 				++size_;
 			}
-			else if (new_node > temp->val) {
+			else if (temp && new_node > temp->val) {
 				req_insert(new_node, temp->right);
 			}
 			else {
@@ -63,6 +63,13 @@ namespace MyDataStructures {
 
 			if (val == temp->val) {
 				if (!temp->left && !temp->right) {
+					if (!par) {
+						delete temp;
+						temp = nullptr;
+						head_ = nullptr;
+						--size_;
+						return true;
+					}
 					if (par->left->val == temp->val) {
 						par->left = nullptr;
 						delete temp;
@@ -85,6 +92,19 @@ namespace MyDataStructures {
 					req_remove(val, new_temp, new_par);
 				}
 				else {
+					if (!par) {
+						if (temp->left) {
+							head_ = temp->left;
+							delete temp;
+							--size_;
+						}
+						else {
+							head_ = temp->right;
+							delete temp;
+							--size_;
+						}
+						return true;
+					}
 					if (temp->left) {
 						if (par->left->val == temp->val) {
 							par->left = temp->left;
@@ -128,26 +148,42 @@ namespace MyDataStructures {
 			}
 		}
 
+		tree_node* helper_copy(const tree_node* node) {
+			tree_node* ret = new tree_node(node->val);
+			if (node->right) ret->right = helper_copy(node->right);
+			if (node->left) ret->left = helper_copy(node->left);
+			return ret;
+		}
+
 	public:
 		bst_tree() : size_(0), head_(nullptr) {}
 		bst_tree(const bst_tree& other) {
-		
+			size_ = other.size_;
+			head_ = helper_copy(other.head_);
 		}
-		bst_tree(bst_tree&& other) noexcept {
-			this->size_ = other.size_;
+		bst_tree(bst_tree&& other) noexcept : size_(other.size_), head_(other.head_) {
 			other.size_ = 0;
-			this->head_ = other.head_;
 			other.head_ = nullptr;
 		}
-		void operator=(const bst_tree& right) {
-		
+		bst_tree& operator=(const bst_tree& right) {
+			if (&right != this) {
+				this->clear();
+				size_ = right.size_;
+				head_ = helper_copy(right.head_);
+			}
+
+			return *this;
 		}
-		void operator=(bst_tree&& right) noexcept {
-			this->clear();
-			this->size_ = right.size_;
-			right.size_ = 0;
-			this->head_ = right.head_;
-			right.head_ = nullptr;
+		bst_tree& operator=(bst_tree&& right) noexcept {
+			if (&right != this) {
+				this->clear();
+				this->size_ = right.size_;
+				right.size_ = 0;
+				this->head_ = right.head_;
+				right.head_ = nullptr;
+			}
+
+			return *this;
 		}
 
 		void insert(T new_node) {
