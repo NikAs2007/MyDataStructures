@@ -35,6 +35,13 @@ TEST(Bst_tree, AllFunctions) {
 	EXPECT_EQ(tr.contains(6), true);
 	EXPECT_EQ(tr.contains(-5), true);
 	EXPECT_EQ(tr.contains(-2), true);
+	bst_tree<int> tr1(std::move(tr));
+	EXPECT_EQ(tr1.size(), 7);
+	EXPECT_EQ(tr.size(), 0);
+	tr = std::move(tr1);
+	EXPECT_EQ(tr1.size(), 0);
+	EXPECT_EQ(tr.size(), 7);
+
 	tr.clear();
 	EXPECT_EQ(tr.size(), 0);
 

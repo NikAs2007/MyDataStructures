@@ -130,10 +130,25 @@ namespace MyDataStructures {
 
 	public:
 		bst_tree() : size_(0), head_(nullptr) {}
-		bst_tree(const bst_tree& other) {}
-		bst_tree(bst_tree&& other) noexcept {}
-		void operator=(const bst_tree& right) {}
-		void operator=(bst_tree&& right) noexcept {}
+		bst_tree(const bst_tree& other) {
+		
+		}
+		bst_tree(bst_tree&& other) noexcept {
+			this->size_ = other.size_;
+			other.size_ = 0;
+			this->head_ = other.head_;
+			other.head_ = nullptr;
+		}
+		void operator=(const bst_tree& right) {
+		
+		}
+		void operator=(bst_tree&& right) noexcept {
+			this->clear();
+			this->size_ = right.size_;
+			right.size_ = 0;
+			this->head_ = right.head_;
+			right.head_ = nullptr;
+		}
 
 		void insert(T new_node) {
 			req_insert(new_node, head_);
