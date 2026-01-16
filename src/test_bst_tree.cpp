@@ -25,6 +25,16 @@ TEST(Bst_tree, AllFunctions) {
 	EXPECT_EQ(tr.contains(2), true);
 	EXPECT_EQ(*tr.find(2), 2);
 	EXPECT_EQ(tr.size(), 8);
+	tr.remove(2);
+	EXPECT_EQ(tr.size(), 7);
+	EXPECT_EQ(tr.contains(2), false);
+	EXPECT_EQ(tr.contains(1), true);
+	EXPECT_EQ(tr.contains(0), true);
+	EXPECT_EQ(tr.contains(5), true);
+	EXPECT_EQ(tr.contains(7), true);
+	EXPECT_EQ(tr.contains(6), true);
+	EXPECT_EQ(tr.contains(-5), true);
+	EXPECT_EQ(tr.contains(-2), true);
 	tr.clear();
 	EXPECT_EQ(tr.size(), 0);
 

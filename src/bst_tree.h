@@ -58,26 +58,67 @@ namespace MyDataStructures {
 			}
 		}
 
-		//bool req_remove(T val, tree_node* temp, tree_node* par) {
-		//	if (!temp) return false;
+		bool req_remove(T val, tree_node* temp, tree_node* par) {
+			if (!temp) return false;
 
-		//	if (val == temp->val) {
-		//		--size_;
-		//		if (par) {
-
-		//		}
-		//		else {
-		//			insert()
-		//		}
-		//		return true;
-		//	}
-		//	else if (val < temp->val) {
-		//		return req_remove(val, temp->left);
-		//	}
-		//	else {
-		//		return req_remove(val, temp->right);
-		//	}
-		//}
+			if (val == temp->val) {
+				if (!temp->left && !temp->right) {
+					if (par->left->val == temp->val) {
+						par->left = nullptr;
+						delete temp;
+						--size_;
+					}
+					else {
+						par->right = nullptr;
+						delete temp;
+						--size_;
+					}
+				}
+				else if (temp->left && temp->right) {
+					tree_node* new_temp = temp->right;
+					tree_node* new_par = temp;
+					while (new_temp->left) {
+						new_par = new_temp;
+						new_temp = new_temp->left;
+					}
+					temp->val = new_temp->val;
+					req_remove(val, new_temp, new_par);
+				}
+				else {
+					if (temp->left) {
+						if (par->left->val == temp->val) {
+							par->left = temp->left;
+							delete temp;
+							--size_;
+						}
+						else {
+							par->right = temp->left;
+							delete temp;
+							--size_;
+						}
+					}
+					else {
+						if (par->left->val == temp->val) {
+							par->left = temp->right;
+							delete temp;
+							--size_;
+						}
+						else {
+							par->right = temp->right;
+							delete temp;
+							--size_;
+						}
+					}
+				}
+				return true;
+			}
+			else if (val < temp->val) {
+				return req_remove(val, temp->left, temp);
+			}
+			else {
+				return req_remove(val, temp->right, temp);
+			}
+		}
 
 		void req_clear(tree_node* temp) {
 			if (temp) {
@@ -106,9 +147,9 @@ namespace MyDataStructures {
 			return find(val) != nullptr;
 		}
 
-		//bool remove(T val){
-		//	return req_remove(val, head_, nullptr);
-		//}
+		bool remove(T val){
+			return req_remove(val, head_, nullptr);
+		}
 
 
 		bool empty() {
